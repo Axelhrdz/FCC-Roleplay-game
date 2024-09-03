@@ -15,6 +15,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 2em 0.2em;
 }
 h1{
     font-size: 2rem;
@@ -29,4 +30,16 @@ button{
     gap: 1em;
     width: 60%;
     margin-top: 3em;
+}
+.assetsContainer{
+    display: flex;
+    gap: 1em;
+    color: #f1c40f;
+}
+.optionsContainer{
+    font-size: 0.7rem;
+}
+.textContainer{
+    background-color: #969696;
+    padding: 0.8em 1.5em;
 }
