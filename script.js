@@ -58,3 +58,7 @@ button1.addEventListener('click', function(){
     update(locations);
     button1.onclick = buyHealth;
 })
+
+
+
+//Upcoming functionalities ------
