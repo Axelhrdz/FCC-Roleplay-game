@@ -68,7 +68,7 @@ const locations = [
     {
         name: "store",
         "button text": ["Buy 10 Health (10 gold)", "Buy weapon (30 gold)", "Go to town"],
-        "button functions": [storeFunctions[0].buyHealth, storeFunctions[1].buyWeapon],
+        "button functions": [storeFunctions[0].buyHealth, storeFunctions[1].buyWeapon, goTown],
         text: "You enter the store."
     },
     {
@@ -76,6 +76,12 @@ const locations = [
         "button text": ["Fight slime", "Fight fanged beast", "Go to town"],
         // "button functions": [buyHealth, buyWeapon, goTown]
         text: "You enter the cave. You see some monsters."
+    },
+    {
+        name: "town",
+        "button text": ["Go to store", "Go to cave", "Fight dragon"],
+        "button functions": [goStore, goCave, goTown],
+        text: "You are in town square"
     },
 ]
 
@@ -94,6 +100,7 @@ function updateLocation(location){
 
     button1.onclick = location["button functions"][0];
     button2.onclick = location["button functions"][1];
+    button3.onclick = location["button functions"][2];
 
     text.innerText = location.text;
     
@@ -106,10 +113,12 @@ function goStore(){
 function goCave(){
     updateLocation(locations[1]);
 }
+function goTown(){
+    updateLocation(locations[2]);
+}
 
 button1.onclick = goStore;
 button2.onclick = goCave;
 // button1.onclick = fightDragon;
-
 
 
