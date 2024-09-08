@@ -39,6 +39,13 @@ button{
 .optionsContainer{
     font-size: 0.7rem;
 }
+.monsters{
+    background-color: #000b79;
+    padding: 0.7em;
+    display: flex;
+    display: none;
+    gap: 1rem;
+}
 .textContainer{
     background-color: #969696;
     padding: 0.8em 1.5em;

@@ -14,6 +14,11 @@ let gold = 50;
 let inventory = ["stick"];
 let currentWeaponIndex = 0;
 
+//Monster Stats
+const monsterContainter = document.querySelector(".monsters");
+const monName = document.getElementById("monName");
+const monHealth = document.getElementById("monHealth");
+
 // console.log(button1);
 console.log(inventory);
 
@@ -22,6 +27,24 @@ const weapons = [
     {name: "dagger", power: 30},
     {name: "claw hammer", power: 50},
     {name: "sword", power: 100}
+]
+
+const monsters = [
+    {
+      name: "slime",
+      level: 2,
+      health: 15
+    },
+    {
+      name: "fanged beast",
+      level: 8,
+      health: 60
+    },
+    {
+      name: "dragon",
+      level: 20,
+      health: 300
+    }
 ]
 
 
@@ -74,7 +97,7 @@ const locations = [
     {
         name: "cave",
         "button text": ["Fight slime", "Fight fanged beast", "Go to town"],
-        // "button functions": [buyHealth, buyWeapon, goTown]
+        "button functions": [fightSlime, fightFanged, goTown],
         text: "You enter the cave. You see some monsters."
     },
     {
@@ -82,6 +105,19 @@ const locations = [
         "button text": ["Go to store", "Go to cave", "Fight dragon"],
         "button functions": [goStore, goCave, goTown],
         text: "You are in town square"
+    },
+    //mosnters
+    {
+        name: "slime",
+        "button text": ["Attack", "Dodge", "Run"],
+        "button functions": [attack, dodge, goTown],
+        text: "You are fighting a monster."
+    },
+    {
+        name: "fanged beast",
+        "button text": ["Attack", "Dodge", "Run"],
+        "button functions": [attack, dodge, goTown],
+        text: "You are fighting a monster."
     },
 ]
 
@@ -115,7 +151,36 @@ function goCave(){
 }
 function goTown(){
     updateLocation(locations[2]);
+    monsterContainter.style.display = "none";
 }
+
+//fight monsters functions ---------------------
+function fightSlime(){
+    updateLocation(locations[3]);
+    monName.innerText = monsters[0].name;
+    monHealth.innerText = monsters[0].health;
+    monsterContainter.style.display = "flex";
+}
+function fightFanged(){
+    // console.log("fanged beast");
+    updateLocation(locations[4]);
+    monName.innerText = monsters[1].name;
+    monHealth.innerText = monsters[1].health;
+    monsterContainter.style.display = "flex";
+}
+
+
+//fighting functions ---------------------
+function attack(){
+    console.log("attack");
+}
+
+function dodge(){
+    console.log("dodge");
+}
+
+
+
 
 button1.onclick = goStore;
 button2.onclick = goCave;
