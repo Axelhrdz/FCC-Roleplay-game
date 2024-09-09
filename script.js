@@ -17,7 +17,11 @@ let currentWeaponIndex = 0;
 //Monster Stats
 const monsterContainter = document.querySelector(".monsters");
 const monName = document.getElementById("monName");
-const monHealth = document.getElementById("monHealth");
+let monHealth = document.getElementById("monHealth");
+
+//Fighting
+let monsterIndex;
+let currentMonsterHealth;
 
 // console.log(button1);
 console.log(inventory);
@@ -33,12 +37,14 @@ const monsters = [
     {
       name: "slime",
       level: 2,
-      health: 15
+      health: 15,
+      gold: 30
     },
     {
       name: "fanged beast",
       level: 8,
-      health: 60
+      health: 60,
+      gold: 50
     },
     {
       name: "dragon",
@@ -119,6 +125,18 @@ const locations = [
         "button functions": [attack, dodge, goTown],
         text: "You are fighting a monster."
     },
+    {
+        name: "lose",
+        "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+        "button functions": [replay, replay, replay],
+        text: "You lose"
+    },
+    {
+        name: "defeat",
+        "button text": ["Go to town square", "Go to town square", "Go to town square"],
+        "button functions": [goTown, goTown, goTown],
+        text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
+    },
 ]
 
 
@@ -142,6 +160,27 @@ function updateLocation(location){
     
 }
 
+function replay(){
+    health = 100;
+    gold = 50;
+    xp = 0;
+
+    userHealth.innerText = health;
+    userGold.innerText = gold;
+    userXp.innerText = xp;
+
+    button1.innerText = "Go store";
+    button2.innerText = "Go cave";
+    button3.innerText = "Fight dragon";
+
+    button1.onclick = goStore;
+    button2.onclick = goCave;
+    // button1.onclick = fightDragon;
+    text.innerText = "Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.";
+
+    monsterContainter.style.display = "none";
+}
+
 function goStore(){
     updateLocation(locations[0]);
 }
@@ -157,22 +196,51 @@ function goTown(){
 //fight monsters functions ---------------------
 function fightSlime(){
     updateLocation(locations[3]);
+    monsterIndex = 0; // Edit later as this is repetitive
+    currentMonsterHealth = monsters[monsterIndex].health;
+
     monName.innerText = monsters[0].name;
     monHealth.innerText = monsters[0].health;
     monsterContainter.style.display = "flex";
+    console.log("fightiin slime " + monsterIndex);
 }
 function fightFanged(){
     // console.log("fanged beast");
     updateLocation(locations[4]);
+    monsterIndex = 1; // Edit later as this is repetitive
+    currentMonsterHealth = monsters[monsterIndex].health;
+
     monName.innerText = monsters[1].name;
     monHealth.innerText = monsters[1].health;
     monsterContainter.style.display = "flex";
+    console.log("fightiin fanged beast " + monsterIndex);
 }
 
 
 //fighting functions ---------------------
 function attack(){
     console.log("attack");
+    if(currentMonsterHealth > 0 && health > 0){
+        //attack monster
+        currentMonsterHealth -= weapons[currentWeaponIndex].power;
+        monHealth.innerText = currentMonsterHealth;
+
+        health -= monsters[monsterIndex].level * 5;
+        userHealth.innerText = health;
+        console.log(currentMonsterHealth);
+    }
+
+    if(currentMonsterHealth <= 0){
+        gold += monsters[monsterIndex].gold;
+        userGold.innerText = gold;
+        text.innerText = "You defeated the monster";
+        updateLocation(locations[6]);
+    }
+    if(health <= 0){
+        updateLocation(locations[5]);
+        text.innerText = "You lose";
+    }
+    
 }
 
 function dodge(){
