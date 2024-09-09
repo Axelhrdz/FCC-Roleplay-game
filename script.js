@@ -109,7 +109,7 @@ const locations = [
     {
         name: "town",
         "button text": ["Go to store", "Go to cave", "Fight dragon"],
-        "button functions": [goStore, goCave, goTown],
+        "button functions": [goStore, goCave, fightDragon],
         text: "You are in town square"
     },
     //mosnters
@@ -136,6 +136,12 @@ const locations = [
         "button text": ["Go to town square", "Go to town square", "Go to town square"],
         "button functions": [goTown, goTown, goTown],
         text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
+    },
+    {
+        name: "dragon",
+        "button text": ["Attack", "Dodge", "Run"],
+        "button functions": [attack, dodge, goTown],
+        text: 'You are fighting the dragon'
     },
 ]
 
@@ -175,7 +181,7 @@ function replay(){
 
     button1.onclick = goStore;
     button2.onclick = goCave;
-    // button1.onclick = fightDragon;
+    button3.onclick = fightDragon;
     text.innerText = "Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.";
 
     monsterContainter.style.display = "none";
@@ -216,6 +222,18 @@ function fightFanged(){
     console.log("fightiin fanged beast " + monsterIndex);
 }
 
+function fightDragon(){
+    console.log("fighting dragon")
+
+    updateLocation(locations[7]);
+    monsterIndex = 2;
+    currentMonsterHealth = monsters[monsterIndex].health;
+
+    monName.innerText = monsters[2].name;
+    monHealth.innerText = monsters[2].health;
+    monsterContainter.style.display = "flex";
+}
+
 
 //fighting functions ---------------------
 function attack(){
@@ -252,6 +270,6 @@ function dodge(){
 
 button1.onclick = goStore;
 button2.onclick = goCave;
-// button1.onclick = fightDragon;
+button3.onclick = fightDragon;
 
 
